@@ -3,6 +3,9 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
+# need this if you want to inference a trt optimized graph
+from tensorflow.contrib import tensorrt as trt
+import time
 
 def load_test_picture(filename):
     """
@@ -21,7 +24,7 @@ def load_test_picture(filename):
     return img
 
 def load_graph(frozen_graph_filename):
-	"""
+    """
     @param frozen_graph_filename: location of the .pb file of frozen graph
     @return: tensorflow graph definition
     """	
@@ -65,13 +68,16 @@ def inference_main(path_frozen_pb, output_node, input_node, img):
     sess = tf.Session(config=conf, graph=calib_graph)
 
     # make the prediction
+    start = time.time()
     prediction = sess.run(y_node, feed_dict={'prefix/' + input_node + ':0': img})
+    end = time.time()
     prediction = prediction.reshape(10)
     print(prediction)
 
     print("\n\n###############################")
     print("your number was recognized as {}".format(np.argmax(prediction)))
     print("###############################")
+    print("duration for inference: {}s".format(end-start))
 
 
 if __name__ == '__main__':
