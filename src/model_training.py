@@ -93,13 +93,19 @@ print(score)
 # Save the trained model as checkpoint
 ##################################################################################
 # Get the name of input- and output-nodes
-model_input = model.input.name
-model_output = model.output.name
+model_input = model.input.name.split(':0')[0]
+model_output = model.output.name.split(':0')[0]
 print(model_input)
+print("\n")
 print(model_output)
 
 # save the model to directory
 sess = K.get_session()
 saver = tf.train.Saver(tf.all_variables())
 saver.save(sess, './modeldir/mnistModel')
+
+# write the input and output node names to a file
+with open('./modeldir/node_names.txt', 'w+') as f:
+	f.write(model_input)
+	f.write(model_output)
 
