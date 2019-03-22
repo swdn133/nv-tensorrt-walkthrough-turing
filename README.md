@@ -28,7 +28,13 @@ the process. The process is tested for the target OS Ubuntu 18.04
       RTX GPUs do not support this! We have already driver 418.43 installed.
       Avoid the installation of driver 410.xx.
     - Do not create any Symlinks as proposed by the installer
-    
+- Add the installation to your environment variables
+
+```
+$ export PATH=$PATH:/usr/local/cuda-10.0/bin
+$ export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64
+```
+
 ### cuDNN
 - Download cuDNN 7.5.0 for CUDA 10.0. Use the tarball (i do not recommend to
   use the deb package). Extract and copy the files as described in the NVIDIA
