@@ -1,4 +1,19 @@
+This repo provides a simple example to manage the first steps of Machine Learning
+on embedded devices like Nvidia's Jetson modules. This tutorial foremost describes the
+toolchain to work with Nvidia's latest Turing devices. 
+Typically the workflow contains several steps:
+- Training the Artificial Neural Network on a Host-PC/Server with much power
+- Freeze and export the trained model
+- Optimize the exported model for the inference on the target architecture
+- Transfer the optimized model on the target device
+- Perform inference on the target device (Jetson)
+
+This repository describes the required installation process (to setup the toolchain
+on a new PC) and provides a sipmle project (simple mnist handwritten character
+recognition) to get familiar with the workflow (and test your installation).
 # Installation Instructions
+This first section describes the installation of all the tools required to run
+the process. The process is tested for the target OS Ubuntu 18.04
 ## Installation of NVIDIA Drivers for RTX 2060
 - Download and install NVIDIA Graphics Driver version 418.43 (or newer)
     - best experience with installation via .run file
@@ -13,24 +28,3 @@
 - Download cudnn 7.5.0 for CUDA 10.0. Use the tarball (i do not recommend to
   use the deb package). Extract and copy the files as described in the NVIDIA
   manual
-
-## Installation of Anaconda
- - Install the latest Anaconda release
- - Create a new environment using Python 3.6
- - activate this environment
- - install required packages
- 
-```
- pip install tensorflow-gpu
- pip install keras
- pip install matplotlib
-```
-
- ## Installation of TensorRT 5.0 GA
- - 5.0 is the version that is supported by JetPack for the Jetson TX2
- - 5.1 has no support for CUDA 10.0
- - Installation via local repo packages without any problems
- - For installation of the tensorrt python utils it is recommended to 
-   download the tar package and extract the required .whl files. Install
-   these .whl files with pip in your anaconda environment.
-
