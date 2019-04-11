@@ -3,8 +3,10 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
+import platform
 # need this if you want to inference a trt optimized graph
-from tensorflow.contrib import tensorrt as trt
+if platform.system() == "Linux":
+    from tensorflow.contrib import tensorrt as trt
 import time
 
 def load_test_picture(filename):
